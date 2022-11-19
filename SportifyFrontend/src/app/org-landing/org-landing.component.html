@@ -1,23 +1,27 @@
-<h1 style="text-align: center;color:rgb(5, 89, 89)">Welcome Caps</h1>
+<h1>
+Participants List
+
+</h1>
 
     <table class="table">
         <thead>
           <tr>
-            <th scope="col">#</th>
             <th scope="col">Name</th>
-            <th scope="col">Class</th>
             <th scope="col">Events</th>
+            <th scope="col">House</th>
+
           </tr>
         </thead>
         <tbody>
         
           <tr *ngFor="let i of data">
-            <th scope="row">2</th>
             <td>{{i.name}}</td>
-            <td>{{i.age}}</td>
-            <td>  {{i.sports}}</td>
-            
+            <td>  {{i.events}}</td>
+            <td>
+                <div [style.background]="i.house" ></div>
+            </td>
           </tr>
           
         </tbody>
       </table>
+
