@@ -25,9 +25,6 @@ export class ApiService {
     return this.http.get(`http://localhost:3000/viewstudents/${house}`)
   };
 
-  DeleteStudentEvent = (datatosend:any) =>{
-    return this.http.post(`http://localhost:3000/removeevent/`,datatosend)
-  }
 
   
 

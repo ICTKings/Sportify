@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { reduce } from 'rxjs';
 import { ApiService } from '../api.service';
+import { AuthenticateService } from '../authenticate.service';
+import jwtDecode, {JwtPayload} from 'jwt-decode';
 
 @Component({
   selector: 'app-hc-landing',
@@ -9,16 +11,27 @@ import { ApiService } from '../api.service';
 })
 export class HcLandingComponent implements OnInit {
 
-  constructor(private api:ApiService) { 
-    api.ViewStudentsByHouse(this.house).subscribe(
-      (res)=>{
-        this.data = res;
-      }
-    )
+  constructor(private api:ApiService, private auth: AuthenticateService) { 
+    this.housetoken = this.auth.getCapToken();
+    if(this.housetoken!==null)
+    {
+      this.tokeninfo = jwtDecode<JwtPayload>(this.housetoken);
+      this.housename = this.tokeninfo.house;
+      api.ViewStudentsByHouse(this.housename).subscribe(
+        (res)=>{
+          this.data = res;
+        }
+      )
+    }
+    
   }
 
   ngOnInit(): void {
   }
   data:any = []
-  house:any = sessionStorage.getItem('house');
+  
+  tokeninfo:any;
+  housetoken:any;
+  housename:any;
+ 
 }

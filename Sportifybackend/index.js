@@ -48,7 +48,7 @@ app.post("/housecaptain", async(req,res)=>{
 });
 
 //Authenticate house captains using JSON Web Tokens.
-app.post("/housecaptainlogin",async (req,res)=>{
+app.post("/housecaptainlogin", async (req,res)=>{
     let request = req.body;
     let data = await CaptainModel.findOne({"user":request.user});
     let user = data.user;
@@ -56,21 +56,21 @@ app.post("/housecaptainlogin",async (req,res)=>{
     let house = data.house;
     if(user!==request.user)
     {
-        res.status(401).send("Invalid username!!");
+        res.status(401).send()
     }
     else if(pass!==request.password)
     {
-        res.status(401).send("Invalid password!!");
+        res.status(401).send();
     }
     else if(house!==request.house)
     {
-        res.status(401).send("Invalid housename!!");
+        res.status(401).send();
     }
     else
     {
-        let payload = {subject:user+pass+house};
+        let payload = {user:user,house:house};
         let token = jwt.sign(payload,'secretKey');
-        res.status(200).send(token);
+        res.status(200).send({token});
     }
 });
 
@@ -120,7 +120,7 @@ app.post("/studentlogin",async(req,res)=>{
     {
         let payload = {subject:name+house+pass};
         let token = jwt.sign(payload,'secretKey');
-        res.send(token);
+        res.send({token});
     }
 });
 
