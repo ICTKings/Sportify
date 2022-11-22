@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import {Router} from '@angular/router'
 @Component({
   selector: 'app-house-captains',
   templateUrl: './house-captains.component.html',
@@ -7,9 +7,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HouseCaptainsComponent implements OnInit {
 
-  constructor() { }
+  
+  constructor(private router:Router) {
+   }
 
   ngOnInit(): void {
+  
   }
+
+  housename = "";
+  movefunc =() =>{
+    sessionStorage.setItem('house',this.housename);
+    this.router.navigate(['/houseCaptainLand'])
+  }
+  
 
 }

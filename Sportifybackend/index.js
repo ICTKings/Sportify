@@ -95,6 +95,8 @@ app.get("/viewstudents/:housename", (req,res)=>{
     StudentModel.find({"house":housename}).then((h)=>{res.send(h)});
 });
 
+
+
 //Authenticate student login using JSON Web Tokens.
 app.post("/studentlogin",async(req,res)=>{
     let request = req.body;
@@ -153,7 +155,6 @@ app.post("/removeevent/:id/:event",async (req,res)=>{
     {$set:{"events":data.events}}).then(()=>res.send(data));
     
 });
-
 
 
 //Send an error if resource requested is invalid.
